@@ -1,9 +1,40 @@
 const app = Vue.createApp({
     data() {
         return {
-            title: "To Do"
+            tasks: []
+        }
+    },
+    computed: {
+        taskCount() {
+            return this.tasks.length;
+        }
+    },
+    methods: {
+        addNewTask(newTask) {
+            this.tasks.push(newTask);
+        },
+        removeTask(task) {
+            this.tasks.splice(this.tasks.indexOf(task), 1);
         }
     }
+});
+
+app.component("to-do", {
+    props: {
+        tasks: {
+            type: Array,
+            required: true
+        },
+        remaining: {
+            type: Number,
+            required: true
+        }
+    },
+    template: `
+        <div class="container my-2">
+            <p><strong>Remaining Tasks: {{ remaining }}</strong></p>
+        </div>
+    `
 })
 
 mountedApp = app.mount("#app")

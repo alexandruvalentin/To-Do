@@ -66,11 +66,14 @@ app.component("to-do", {
             <div v-for="task in tasks">
                 <div class="alert alert-secondary alert-dismissible fade show" role="alert">
                     {{ task }}
-                    <button @click="removeTask(task)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button @click="removeTask(task)" type="button" class="close no-outline" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
+
+            <p v-if="error">{{ error }}</p>
+            <p v-if="remaining === 0">To add a new task, write something and hit Enter.</p>
         </div>
     `
 })
